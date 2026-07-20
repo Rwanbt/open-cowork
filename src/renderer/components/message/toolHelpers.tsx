@@ -1,5 +1,6 @@
 // Utility functions for tool use/result display
 import { Terminal, FileCode, FileText, Pencil, Search, Globe, FolderSearch } from 'lucide-react';
+import type { TFunction } from 'i18next';
 
 /** Map a tool name to a small icon element */
 export function getToolIcon(name: string) {
@@ -40,7 +41,8 @@ export function getMcpToolDisplayName(name: string, displayName?: string): strin
 export function getToolLabel(
   name: string,
   input: Record<string, unknown>,
-  displayName?: string
+  displayName: string | undefined,
+  t: TFunction
 ): string {
   const inp = input || {};
   // MCP tools
@@ -51,30 +53,30 @@ export function getToolLabel(
   const nameLower = name.toLowerCase();
   if (nameLower === 'read' || nameLower === 'read_file') {
     const p = String(inp.file_path || inp.path || '');
-    return p ? `Read ${shortenPath(p)}` : 'Read file';
+    return p ? t('toolLabels.readPath', { path: shortenPath(p) }) : t('toolLabels.readFile');
   }
   if (nameLower === 'write' || nameLower === 'write_file') {
     const p = String(inp.file_path || inp.path || '');
-    return p ? `Write ${shortenPath(p)}` : 'Write file';
+    return p ? t('toolLabels.writePath', { path: shortenPath(p) }) : t('toolLabels.writeFile');
   }
   if (nameLower === 'edit' || nameLower === 'edit_file') {
     const p = String(inp.file_path || inp.path || '');
-    return p ? `Edit ${shortenPath(p)}` : 'Edit file';
+    return p ? t('toolLabels.editPath', { path: shortenPath(p) }) : t('toolLabels.editFile');
   }
   if (nameLower === 'bash' || nameLower === 'execute_command') {
     const cmd = String(inp.command || inp.cmd || '');
     if (cmd) {
       const short = cmd.length > 60 ? cmd.substring(0, 57) + '...' : cmd;
-      return `$ ${short}`;
+      return t('toolLabels.runCommandWith', { command: short });
     }
-    return 'Run command';
+    return t('toolLabels.runCommand');
   }
-  if (nameLower === 'glob') return inp.pattern ? `Glob ${String(inp.pattern)}` : 'Glob';
-  if (nameLower === 'grep') return inp.pattern ? `Grep "${String(inp.pattern)}"` : 'Grep';
-  if (nameLower === 'websearch') return inp.query ? `Search "${String(inp.query)}"` : 'Web search';
+  if (nameLower === 'glob') return inp.pattern ? t('toolLabels.globPattern', { pattern: String(inp.pattern) }) : t('toolLabels.glob');
+  if (nameLower === 'grep') return inp.pattern ? t('toolLabels.grepPattern', { pattern: String(inp.pattern) }) : name;
+  if (nameLower === 'websearch') return inp.query ? t('toolLabels.webSearchQuery', { query: String(inp.query) }) : t('toolLabels.webSearch');
   if (nameLower === 'webfetch') {
     const url = String(inp.url || '');
-    return url ? `Fetch ${url.length > 50 ? url.substring(0, 47) + '...' : url}` : 'Fetch URL';
+    return url ? t('toolLabels.fetchUrlWith', { url: url.length > 50 ? url.substring(0, 47) + '...' : url }) : t('toolLabels.fetchUrl');
   }
   return name;
 }

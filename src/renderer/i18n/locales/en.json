@@ -933,5 +933,23 @@
     "completed": "Completed",
     "inDuration": "in {{duration}}",
     "showResult": "Show result"
+  },
+  "toolLabels": {
+    "readFile": "Read file",
+    "readPath": "Read {{path}}",
+    "writeFile": "Write file",
+    "writePath": "Write {{path}}",
+    "editFile": "Edit file",
+    "editPath": "Edit {{path}}",
+    "runCommand": "Run command",
+    "runCommandWith": "$ {{command}}",
+    "glob": "Glob",
+    "globPattern": "Glob {{pattern}}",
+    "grepPattern": "Grep \"{{pattern}}\"",
+    "webSearch": "Web search",
+    "webSearchQuery": "Search \"{{query}}\"",
+    "fetchUrl": "Fetch URL",
+    "fetchUrlWith": "Fetch {{url}}",
+    "screenshotCaptured": "Screenshot captured"
   }
 }

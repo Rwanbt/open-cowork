@@ -1,6 +1,7 @@
 // Fallback ToolResultBlock — only renders for truly orphan results (no matching tool_use anywhere)
 import { useState, memo, useMemo } from 'react';
 import { ChevronDown, ChevronRight, XCircle, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../../store';
 import {
   shouldPreferToolResultImages,
@@ -24,6 +25,7 @@ export const ToolResultBlock = memo(function ToolResultBlock({
   allBlocks,
   message,
 }: ToolResultBlockProps) {
+  const { t } = useTranslation();
   const traceSteps = useAppStore((s) =>
     message?.sessionId ? (s.sessionStates[message.sessionId]?.traceSteps ?? []) : []
   );
@@ -75,7 +77,7 @@ export const ToolResultBlock = memo(function ToolResultBlock({
       const firstLine = content.split(/\r?\n/)[0];
       return firstLine.length > 60 ? firstLine.substring(0, 57) + '...' : firstLine;
     }
-    if (shouldUseScreenshotSummary(toolName, content)) return 'Screenshot captured';
+    if (shouldUseScreenshotSummary(toolName, content)) return t('toolLabels.screenshotCaptured');
     if (content.length < 60) return content.trim();
     const lines = content.trim().split(/\r?\n/);
     return `${lines.length} lines`;

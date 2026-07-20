@@ -1,6 +1,7 @@
 // Tool use card — collapsible, merges matching tool_result from same/other messages
 import { useState, memo } from 'react';
 import { ChevronDown, ChevronRight, Loader2, XCircle, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../../store';
 import {
   shouldPreferToolResultImages,
@@ -26,6 +27,7 @@ export const ToolUseBlock = memo(function ToolUseBlock({
   allBlocks,
   message,
 }: ToolUseBlockProps) {
+  const { t } = useTranslation();
   const traceSteps = useAppStore((s) =>
     message?.sessionId ? (s.sessionStates[message.sessionId]?.traceSteps ?? []) : []
   );
@@ -70,7 +72,7 @@ export const ToolUseBlock = memo(function ToolUseBlock({
   const isError = toolResult?.isError === true;
   const isSuccess = toolResult && !isError;
 
-  const label = getToolLabel(block.name, block.input, block.displayName);
+  const label = getToolLabel(block.name, block.input, block.displayName, t);
   const isMCPTool = block.name.startsWith('mcp__');
   const mcpServerName = isMCPTool ? block.name.match(/^mcp__(.+?)__/)?.[1] : null;
 
@@ -81,7 +83,7 @@ export const ToolUseBlock = memo(function ToolUseBlock({
       const firstLine = content.split(/\r?\n/)[0];
       return firstLine.length > 60 ? firstLine.substring(0, 57) + '...' : firstLine;
     }
-    if (shouldUseScreenshotSummary(block.name, content)) return 'Screenshot captured';
+    if (shouldUseScreenshotSummary(block.name, content)) return t('toolLabels.screenshotCaptured');
     if (content.length < 60) return content.trim();
     const lines = content.trim().split(/\r?\n/);
     return `${lines.length} lines`;

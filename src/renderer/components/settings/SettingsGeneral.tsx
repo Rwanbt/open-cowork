@@ -6,7 +6,6 @@ export function SettingsGeneral() {
   const { i18n, t } = useTranslation();
   const settings = useAppStore((s) => s.settings);
   const updateSettings = useAppStore((s) => s.updateSettings);
-  const currentLang = i18n.language.startsWith('zh') ? 'zh' : 'en';
   const [appVer, setAppVer] = useState('');
   useEffect(() => {
     try {
@@ -21,7 +20,24 @@ export function SettingsGeneral() {
   const languages = [
     { code: 'en', nativeName: 'English' },
     { code: 'zh', nativeName: '中文' },
+    { code: 'ar', nativeName: 'العربية' },
+    { code: 'pt-BR', nativeName: 'Português (Brasil)' },
+    { code: 'bs', nativeName: 'Bosanski' },
+    { code: 'da', nativeName: 'Dansk' },
+    { code: 'de', nativeName: 'Deutsch' },
+    { code: 'es', nativeName: 'Español' },
+    { code: 'fr', nativeName: 'Français' },
+    { code: 'ja', nativeName: '日本語' },
+    { code: 'ko', nativeName: '한국어' },
+    { code: 'nb', nativeName: 'Norsk bokmål' },
+    { code: 'pl', nativeName: 'Polski' },
+    { code: 'ru', nativeName: 'Русский' },
+    { code: 'th', nativeName: 'ไทย' },
+    { code: 'tr', nativeName: 'Türkçe' },
+    { code: 'zh-TW', nativeName: '繁體中文' },
   ];
+
+  const currentLang = languages.some((l) => l.code === i18n.language) ? i18n.language : 'en';
 
   const themeOptions = [
     { value: 'light' as const, label: t('general.themeLight') },
@@ -54,7 +70,7 @@ export function SettingsGeneral() {
       {/* Language */}
       <div className="space-y-3">
         <h4 className="text-sm font-medium text-text-primary">{t('general.language')}</h4>
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
           {languages.map((lang) => (
             <button
               key={lang.code}

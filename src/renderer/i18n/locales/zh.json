@@ -105,7 +105,7 @@
     "scopeAll": "全部记忆",
     "scopeGlobal": "仅 core memory",
     "currentWorkspace": "当前工作区",
-    "groupCore": "Core Memory",
+    "groupCore": "核心记忆",
     "groupSessions": "Session 摘要",
     "groupChunks": "Chunk 命中",
     "detailTitle": "明细",
@@ -225,14 +225,14 @@
       "baseUrlHint": "已识别为 {{service}}。推荐使用 {{recommendedProtocol}} 配置：{{baseUrl}}。示例模型：{{model}}。",
       "genericBaseUrlHint": "这看起来像一个自定义的 {{recommendedProtocol}} 兼容 endpoint。推荐的 Base URL 格式：{{baseUrl}}。示例模型：{{model}}。",
       "protocolLabels": {
-        "anthropic": "Anthropic",
-        "openai": "OpenAI",
-        "gemini": "Gemini"
+        "anthropic": "Anthropic 协议",
+        "openai": "OpenAI 协议",
+        "gemini": "Gemini 协议"
       },
       "columns": {
         "service": "服务",
         "protocol": "协议",
-        "baseUrl": "Base URL",
+        "baseUrl": "基础 URL",
         "model": "示例模型",
         "notes": "说明",
         "action": "操作"
@@ -246,15 +246,15 @@
       },
       "setups": {
         "openrouter": {
-          "name": "OpenRouter",
+          "name": "OpenRouter 服务",
           "note": "除非你在调试自定义中继，否则优先使用专用的 OpenRouter 配置入口。"
         },
         "deepseek": {
-          "name": "DeepSeek API",
+          "name": "DeepSeek API 服务",
           "note": "推荐使用 OpenAI 兼容协议，并按 DeepSeek 文档填写精确模型 ID。"
         },
         "kimi": {
-          "name": "Kimi Coding",
+          "name": "Kimi Coding 服务",
           "note": "推荐对 coding endpoint 使用 Anthropic 兼容协议，并按 Moonshot 文档确认精确的 coding 模型 ID。"
         },
         "glm": {
@@ -262,7 +262,7 @@
           "note": "当 endpoint 路径包含 /api/anthropic 时，推荐使用 Anthropic 兼容协议。"
         },
         "ollama": {
-          "name": "Ollama",
+          "name": "Ollama 服务",
           "note": "本地模型发现与刷新更适合使用专用的 Ollama 配置入口。"
         },
         "gemini": {
@@ -270,7 +270,7 @@
           "note": "推荐使用 Gemini 兼容协议，并填写该 endpoint 暴露的精确模型 ID。"
         },
         "minimax": {
-          "name": "MiniMax",
+          "name": "MiniMax 服务",
           "note": "除非网关文档明确说明其他协议，否则优先按 OpenAI 兼容协议配置。"
         },
         "genericOpenAI": {
@@ -325,7 +325,7 @@
         "not_deep_verified": "已验证端点可达且当前模型在端点返回列表中，但尚未执行真实推理。",
         "model_loading": "端点可达，但模型可能仍在加载到内存中。"
       },
-      "latency": "{{ms}}ms",
+      "latency": "延迟：{{ms}}ms",
       "fix": {
         "dns_resolve_failed": "无法解析域名 {{host}}，请检查 URL 是否正确",
         "tcp_connect_failed": "无法连接到 {{host}}，请检查网络或防火墙设置",
@@ -483,11 +483,11 @@
     "typeSseRemote": "SSE（远程）",
     "typeStreamableHttp": "HTTP（Streamable）",
     "command": "命令",
-    "commandPlaceholder": "npx",
+    "commandPlaceholder": "例如 npx",
     "arguments": "参数",
-    "argumentsPlaceholder": "-y chrome-devtools-mcp@latest --browser-url http://localhost:9222",
+    "argumentsPlaceholder": "例如 -y chrome-devtools-mcp@latest --browser-url http://localhost:9222",
     "spaceSeparated": "空格分隔的参数",
-    "url": "URL",
+    "url": "URL（端点）",
     "enableConnector": "启用此连接器",
     "presetAlreadyConfigured": "连接器“{{name}}”已配置",
     "envValuePlaceholder": "输入值",
@@ -655,7 +655,7 @@
     "copyPath": "复制路径",
     "openInFileManager": "在文件管理器中打开",
     "contextUsage": "上下文用量",
-    "contextUsageLabel": "{{used}} / {{total}}"
+    "contextUsageLabel": "上下文：{{used}} / {{total}}"
   },
   "compaction": {
     "turnsLeft": "轮剩余",
@@ -667,7 +667,7 @@
     "history": "压缩历史",
     "autoCompact": "自动压缩",
     "manualCompact": "手动压缩",
-    "tokens": "tokens",
+    "tokens": "令牌",
     "summary": "摘要",
     "filesReferenced": "引用的文件",
     "more": "更多"
@@ -825,9 +825,9 @@
     "openFeishu": "打开飞书开放平台",
     "slackTitle": "Slack 机器人配置",
     "slackDesc": "创建 Slack 应用并安装到工作区，然后在此填写凭据。",
-    "slackBotToken": "Bot User OAuth Token",
+    "slackBotToken": "Bot User OAuth 令牌（Slack）",
     "slackAppToken": "App-Level Token（Socket Mode 使用）",
-    "slackSocketMode": "Socket Mode",
+    "slackSocketMode": "Socket 模式",
     "slackSocketModeDesc": "主动连接 Slack，无需公网 IP。",
     "openSlack": "打开 Slack API",
     "connectionTitle": "连接方式",
@@ -933,5 +933,23 @@
     "completed": "已完成",
     "inDuration": "耗时 {{duration}}",
     "showResult": "查看结果"
+  },
+  "toolLabels": {
+    "readFile": "读取文件",
+    "readPath": "读取 {{path}}",
+    "writeFile": "写入文件",
+    "writePath": "写入 {{path}}",
+    "editFile": "编辑文件",
+    "editPath": "编辑 {{path}}",
+    "runCommand": "运行命令",
+    "runCommandWith": "执行：$ {{command}}",
+    "glob": "文件匹配",
+    "globPattern": "匹配 {{pattern}}",
+    "grepPattern": "搜索 \"{{pattern}}\"",
+    "webSearch": "网页搜索",
+    "webSearchQuery": "搜索 \"{{query}}\"",
+    "fetchUrl": "获取网址",
+    "fetchUrlWith": "获取 {{url}}",
+    "screenshotCaptured": "已截图"
   }
 }
